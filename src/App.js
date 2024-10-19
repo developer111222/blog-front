@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ResponsiveAppBar from './components/header/Header';
 import Home from './components/home/Home';
 import Signup from './components/authenticate/signup';
-import Login from './components/authenticate/login';
+import Login from './components/authenticate/Login' ;
 import AdminDashboard from './components/dashboard/AdminDashboard';
 import FriendRequest from './components/websocket/SocketCon';
 import ProtectedRoute from './utils/ProtectedRoute';
