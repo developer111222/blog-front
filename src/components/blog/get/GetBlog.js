@@ -51,7 +51,7 @@ export default function DataTable() {
     { field: 'title', headerName: 'Title', width: 300 },  
     { field: 'link', headerName: 'link', width: 100,
       renderCell: (params) => (  
-        <a href={`http://localhost:3000/blog/${params.row.id}`} target="_blank" rel="noopener noreferrer">  
+        <a href={`https://blog-front-tau-five.vercel.app/blog/${params.row.id}`} target="_blank" rel="noopener noreferrer">  
       view blog
         </a>  
       ),
