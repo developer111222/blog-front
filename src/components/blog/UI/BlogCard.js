@@ -80,7 +80,7 @@ export default function BlogCard() {
                   Author:
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '16px' }}>
-                  {item.user.email}
+                  {item.user && item.user.email}
                 </Typography>
               </CardActions> 
             </Card>  
