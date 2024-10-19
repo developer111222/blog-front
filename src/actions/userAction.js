@@ -2,7 +2,7 @@ import axios from "axios";
 import getsiteurl from "../utils/getsiteurl";
 import { 
   SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAIL,
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL,PROFILE_REQUEST,PROFILE_SUCCESS,PROFILE_FAIL,
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL,PROFILE_REQUEST,PROFILE_SUCCESS,PROFILE_FAIL,RESEND_OTP_REQUEST,RESEND_OTP_SUCCESS,RESEND_OTP_FAIL,
   RESET_CLEAR ,VERIFY_REQUEST,VERIFY_SUCCESS,VERIFY_FAIL,FORGET_PASSWORD_REQUEST,FORGET_PASSWORD_SUCCESS,FORGET_PASSWORD_FAIL,RESET_PASSWORD_FAIL,RESET_PASSWORD_SUCCESS,RESET_PASSWORD_REQUEST
 } from "../constants/userConstant";
 import Cookies from "universal-cookie";
@@ -87,6 +87,23 @@ export const otpverify = (email, otp) => async (dispatch) => {
     }
 };
 
+
+//-------------------------------resend otp-----------------------
+
+export const resendOtp = (email) => async (dispatch) => {
+    try {
+        dispatch({type: RESEND_OTP_REQUEST})
+        const config = { headers: { 'Content-Type': 'application/json' } };
+        const data=await axios.post(`${url}/api/resendotp`, {email}, config)
+        dispatch({type:RESEND_OTP_SUCCESS,payload:data});
+    } catch (error) {
+        dispatch({type:RESEND_OTP_FAIL,
+            payload: error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+        })
+    }
+}
 
 //---------------------------FORGET PASSWORD------------------------
 
