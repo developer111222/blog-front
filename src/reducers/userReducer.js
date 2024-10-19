@@ -1,4 +1,4 @@
-import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS,LOGIN_FAIL, LOGOUT_FAIL, LOGOUT_SUCCESS, RESET_CLEAR, LOGIN_VALID, PROFILE_REQUEST, PROFILE_SUCCESS, PROFILE_FAIL ,VERIFY_REQUEST,VERIFY_SUCCESS,VERIFY_FAIL,FORGET_PASSWORD_FAIL,FORGET_PASSWORD_REQUEST,FORGET_PASSWORD_SUCCESS,RESET_PASSWORD_REQUEST,RESET_PASSWORD_SUCCESS,RESET_PASSWORD_FAIL} from "../constants/userConstant";
+import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS,LOGIN_FAIL, LOGOUT_FAIL, LOGOUT_SUCCESS, RESET_CLEAR, LOGIN_VALID, PROFILE_REQUEST, PROFILE_SUCCESS, PROFILE_FAIL ,VERIFY_REQUEST,VERIFY_SUCCESS,VERIFY_FAIL,FORGET_PASSWORD_FAIL,FORGET_PASSWORD_REQUEST,FORGET_PASSWORD_SUCCESS,RESET_PASSWORD_REQUEST,RESET_PASSWORD_SUCCESS,RESET_PASSWORD_FAIL,RESEND_OTP_REQUEST,RESEND_OTP_FAIL,RESEND_OTP_SUCCESS} from "../constants/userConstant";
 
 const initialState = {
     user: [],    // Your initial state for the user
@@ -8,7 +8,7 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
      
-case SIGNUP_REQUEST, LOGIN_REQUEST, PROFILE_REQUEST, VERIFY_REQUEST, FORGET_PASSWORD_REQUEST, RESET_PASSWORD_REQUEST:
+case SIGNUP_REQUEST, LOGIN_REQUEST, PROFILE_REQUEST, VERIFY_REQUEST, FORGET_PASSWORD_REQUEST, RESEND_OTP_REQUEST,RESET_PASSWORD_REQUEST:
     return {
       ...state,
       loading: true,
@@ -23,6 +23,7 @@ case SIGNUP_REQUEST, LOGIN_REQUEST, PROFILE_REQUEST, VERIFY_REQUEST, FORGET_PASS
       case FORGET_PASSWORD_FAIL :
         case RESET_PASSWORD_FAIL:
           case LOGOUT_FAIL :
+            case RESEND_OTP_FAIL :
     return {
       ...state,
       loading: false,
@@ -44,7 +45,7 @@ case SIGNUP_REQUEST, LOGIN_REQUEST, PROFILE_REQUEST, VERIFY_REQUEST, FORGET_PASS
       return{
         ...state,
         loading: false,
-        issuccess: true,
+        isverify: true,
         isAuthenticated: false, // Fix this typo
         message: action.payload.message,  // Optional, if you have a message to show
       }
@@ -74,6 +75,13 @@ case SIGNUP_REQUEST, LOGIN_REQUEST, PROFILE_REQUEST, VERIFY_REQUEST, FORGET_PASS
           isAuthenticated: false, // Fix this typo
           message: action.payload.message,  // Optional, if you have a message to show
         };
+        case RESEND_OTP_SUCCESS :
+          return{
+            ...state,
+            loading:false,
+            resendotpsuccess:true,
+            message:action.payload.message
+          }
     case PROFILE_SUCCESS:
       return {
         ...state,
