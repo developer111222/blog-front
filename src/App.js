@@ -9,6 +9,7 @@ import ResponsiveAppBar from './components/header/Header';
 import Home from './components/home/Home';
 import Signup from './components/authenticate/signup';
 import Login from './components/authenticate/Login' ;
+import OtpVerify from './components/authenticate/OtpVerify';
 import AdminDashboard from './components/dashboard/AdminDashboard';
 import FriendRequest from './components/websocket/SocketCon';
 import ProtectedRoute from './utils/ProtectedRoute';
@@ -40,6 +41,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+ <Route path="/otp-verify" element={<OtpVerify />} />
           <Route path="/blog" element={<BlogCard />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
