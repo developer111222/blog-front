@@ -4,7 +4,7 @@ const getsiteurl = () => {
 
     const url =
   
-    'https://blog-backend-latest-xxss.onrender.com/'
+    'https://blog-backend-latest-xxss.onrender.com'
   return url
 }
 
