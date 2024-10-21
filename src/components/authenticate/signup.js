@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';  
 import { NavLink, useNavigate } from 'react-router-dom';  
 import { toast } from 'react-toastify';  
-
+import Spinner from '../../utils/Spinner';
 import { usersignup, ResetClear } from '../../actions/userAction';  
 
 const Signup = () => {  
@@ -13,9 +13,11 @@ const Signup = () => {
 
     const [email, setEmail] = useState('');  
     const [password, setPassword] = useState('');  
+    const [localLoading, setLocalLoading] = useState(false); // Local loading state
 
     const handleSignup = async (e) => {  
         e.preventDefault();  
+        setLocalLoading(true); // Start loading
         dispatch(usersignup(email, password));  
     };  
 
@@ -23,11 +25,14 @@ const Signup = () => {
         if (error) {  
             toast.error(error);  
             dispatch(ResetClear());  
+            setLocalLoading(false); // Stop loading on error
         }  
         if (issuccess) {  
             toast.success(message);  
             // Redirect to verification page and pass email as state
             navigate('/otp-verify', { state: { email } });  
+            dispatch(ResetClear());
+            setLocalLoading(false); // Stop loading on success
         }  
     }, [dispatch, error, issuccess, message, navigate, email]);  
 
@@ -63,8 +68,8 @@ const Signup = () => {
                             required  
                         />  
                     </div>
-                    <button type='submit' className='login-btn my-10' disabled={loading}>  
-                        {loading ? 'Signing Up...' : 'Sign Up'}  
+                    <button type='submit' className='login-new my-10' disabled={loading || localLoading}>  
+                        {localLoading ? <Spinner/> : 'Sign Up'}  
                     </button>  
                 </form>
                 <div className='text-center my-4'>
