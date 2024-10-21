@@ -107,7 +107,20 @@ button{
     border-radius: 50px;
     cursor: pointer;
 }
-
+.login-new {
+    display: flex;               /* Use flexbox */
+    align-items: center;        /* Center vertically */
+    justify-content: center;    /* Center horizontally */
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #090a09;
+    width: -webkit-fill-available;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 50px;
+    cursor: pointer;
+}
 .text-decoration-none{
     text-decoration: none;
 }
