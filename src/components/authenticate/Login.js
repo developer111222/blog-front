@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userlogin, ResetClear } from '../../actions/userAction';
 import { toast } from 'react-toastify';
 import { NavLink, useNavigate } from 'react-router-dom';  
+import Spinner from '../../utils/Spinner';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -11,9 +12,11 @@ const navigate=useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [localLoading, setLocalLoading] = useState(false);
 
   const handleVerify = (e) => {
     e.preventDefault();
+    setLocalLoading(true);
     dispatch(userlogin(email,password));
   };
 
@@ -21,6 +24,7 @@ const navigate=useNavigate();
 
       if (error) {
         toast.error(error); // Display error toast
+        setLocalLoading(false);
         dispatch(ResetClear());
       }
    
@@ -29,6 +33,8 @@ const navigate=useNavigate();
       // Move to the next step if signup is successful
       toast.success(message); // Display success toast for signup
       navigate('/user-dashboard')
+      dispatch(ResetClear());
+      setLocalLoading(false);
     }
   }, [dispatch,error, success]);
 
@@ -72,9 +78,9 @@ const navigate=useNavigate();
                     </div>
                     <div className=''>
                     <NavLink className='fs-5 text-decoration-none' style={{float:'right'}} to="/forget-password">forget password</NavLink>
-                    </div>
-                    <button type='submit' className='login-btn' disabled={loading}>  
-                        Login
+                    </div><br></br>
+                    <button type='submit' className='login-new' disabled={loading || localLoading}>  
+                    {localLoading ? <Spinner/> : 'login '} 
                     </button>  
                     <div className='text-center my-4'>
                     <NavLink className='fs-5 text-decoration-none my-10' to="/signup">sign up now</NavLink>
