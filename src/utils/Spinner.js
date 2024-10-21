@@ -1,15 +1,12 @@
-import React from 'react'
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const Spinner = () => {
+export default function CircularSize() {
   return (
-   
-      <div class="d-flex justify-content-center">
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>
+    <Stack spacing={2} direction="row" alignItems="center">
+      <CircularProgress size="25px" />
     
-  )
+    </Stack>
+  );
 }
-
-export default Spinner
